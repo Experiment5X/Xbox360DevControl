@@ -1,0 +1,159 @@
+addtitlemem:GetAdditionalTitleMemorySetting
+adminpw:SetAdminPasswd
+advmem:ToggleAdvancedMemory
+altaddr:GetAltAddr
+authuser:AuthenticateUser:ADMIN RESP=0q%08x%08x
+autoinput:AutomateInput:user=%d bind queuelen=%d:user=%d clearqueue:user=%d connect:user=%d disconnect:user=%d process:user=%d queryqueue:user=%d queuepackets count=%d%s%s:user=%d setpacket:user=%d unbind
+autoprof:AutomateProfile:xuid=0q%016I64
+avatar:AvatarInstrument
+bkgdmodetest:ConfigureBackgroundTestMode
+bootanim:SetBootAnimationFlag
+boxid:GetBoxId
+break:DoBreak:clearall
+builtinmu:ConfigureBuiltinMu
+bye:EndConversation
+capctrl:CAPControl:%s
+civfail:CIVShowAPfail
+civinject:CIVInject
+civsetbits:CIVSetSecurityBits
+civstart:CIVCreateProcess
+civstatus:CIVStatus
+civstop:CIVCloseProcess
+civverify:CIVVerify
+consolefeatures:GetConsoleFeatures
+consolemem:GetConsoleDebugMemoryStatus
+consoletype:GetConsoleType
+continue:ContinueThread:THREAD=0x%0.8x %s
+crashdump:CrashDump
+dbgextld:LoadUnloadDebuggerExtension:name=%s:unload module=0x%08x
+dbgname:SetDbgName:name=%s
+dbgprint:WalkDebugStrings
+debugger:ConnectDebugger:%s:CONNECT PORT=0x%0.8x%s user=%s%s%s%s:DISCONNECT PORT=0x%0.8x
+debugmemsize:GetDebugMemorySize
+debugmode:SetDebugSecureMode
+dedicate:DedicateConnection:GLOBAL:HANDLER=%s:
+deftitle:SetDefaultTitle
+delete:DeleteFile:NAME="%s" %s
+detour:Detour
+dirlist:GetDirList:NAME="%s"
+dmtelllog:DmTellLog
+dmversion:ReportDmVersion
+drivefreespace:GetDriveFreeSpace:NAME="%s"
+drivelist:GetDriveList
+dumpmode:DumpMode:%s
+dumpsettings:DumpSettings:rpt=%s dst=%s fmt=%s path=%s
+dvdblk:GetDvdBlk
+dvdeject:EjectDvd
+dvdperf:DvdPerf
+eventdefer:EventDeferFlags:set
+fastpipe:SetupFastPipe:group=%d
+feature:SetFeature
+fileeof:SetFileSize:NAME="%s" SIZE=%lu%s
+fileevent:FileEvent
+flash:FlashKernelImage
+fmtfat:FormatFAT
+getconsoleid:GetConsoleId
+getcontext:GetContext:THREAD=0x%0.8x
+getfileattributes:GetFileAttributes:NAME="%s"
+gethddblk:GetHddBlk
+getnetaddrs:GetNetAddrs
+getpid:GetPid
+getsockinfo:GetSockInfo
+getsum:GetSum:ADDR=0x%08x LENGTH=0x%08x BLOCKSIZE=0x%08x
+getuserpriv:GetUserPriv:NAME="%s"
+getvfattr:GetVolumeFileAttributes:COUNT=%d
+getxnkeyinfo:GetXnKeyInfo
+getxnqoslookupinfo:GetXnQosLookupInfo
+getxnsecassocinfo:GetXnSecAssocInfo
+go:Go
+gpucount:ToggleGPUCounters:%s
+halt:HaltThread:THREAD=0x%0.8x
+hdd:ConfigureHdd
+httpdashthrottle:HttpDashThrottle
+httpreg:HttpRegCommand
+ipproxy:IpProxy
+iptv:ConfigureIPTV
+iptvallowuninstall:ConfigureIPTVAllowUninstall
+iptvbootstrapurl:ConfigureIPTVBootstrapURL
+iptvdvr:ConfigureIPTVDVR
+iptvprovidername:ConfigureIPTVProviderName
+iptvprovisioningurl:ConfigureIPTVProvisioningURL
+iptvsupportinfo:ConfigureIPTVSupportInfo
+irtsweep:IrtSweep
+isbreak:IsBreak:ADDR=0x%08x
+isdebugger:IsDebuggerPresent
+isstopped:IsStopped:THREAD=0x%0.8x
+kd:ToggleKDState
+kdlite:ToggleKDLite
+kdnet:SetKdNet
+keyxchg:KeyExchange
+kinecthsmsg:SetKinectHealthAndSafetyMsg
+livesigninrequired:SetGamesRequireLiveSigninFlag
+lockmode:SetLockMode:BOXID=0q%08x%08x:UNLOCK
+lopctrl:LOPControl:%s:info
+magicboot:MagicReboot:%s%s:title=\"%s\" directory=\"%s\"%s%s:title=\"%s\"%s%s
+mdetect:SetMediaDetectionFlag
+memtrack:AllocationTrackCmdProc:cmd=querytype type=0x%x
+mixcmd:MixCommand
+mkdir:Mkdir:NAME="%s
+modsections:ListModuleSections:NAME="%s"
+modules:ListModules
+netcap:NetCap
+netsim:NetSim:%hs%hs%hs%hs
+nicstats:GetNicStats:deviceflags=0x%08x
+nostopon:Nostopon
+notify:SetupNotify:reconnectport=%d reverse%s
+notifyat:SetupNotifyAt:port=%d drop
+notifyport:SetupNotify
+oddlog:OpticalDiscLog
+pclist:ListCounters
+pdbinfo:PdbInfo:addr=0x%X
+perfstat:PerfStatistic
+pixcmd:PixCommand
+pixpreview:PixPreview
+pogoctrl:PgoControl:allocscale module=0x%x scale=%u:snapshot phase=\"%s\" reset=%u module=0x%x:start module=0x%x:stop module=0x%x
+prevflash:ConfigurePreviousFlashVersion
+querypc:QueryPerformanceCounter:NAME="%s" TYPE=0x%08x
+reboot:RebootDeprecated
+rename:RenameFile:NAME="%s" NEWNAME="%s"
+resume:ResumeThread:THREAD=0x%0.8x
+rpc:RemoteProcedureCall
+rundashnuioobe:SetEnforceDashNuiOobeFlag
+runnuioobe:SetEnforceNuiOobeFlag
+runoobe:SetEnforceOobeFlag
+runoobecheckpoint:SetEnforceOobeCheckpointFlag
+sendvfile:ReceiveVolumeFile:COUNT=%d
+setconfig:SetConfig:CATEGORY=0x%08x INDEX=0x%08x VALUE=0x%08x
+setcontext:SetContext:thread=0x%0.8x REGISTER_NAME=0q%016I64x
+setfileattributes:SetFileAttributes:NAME="%s":CREATEHI=0x%08x CREATELO=0x%08x CHANGEHI=0x%08xCHANGELO=0x%08x:READONLY=%d HIDDEN=%d
+sethddblk:SetHddBlk
+setreset:SetResetChord
+setserver:SetServerName
+setsystime:SetSystemTime:clockhi=0x%08x clocklo=0x%08x
+setuserpriv:SetUserPriv:NAME="%s"
+spew:DebugSpew
+srvproc:SrvProc
+stop:Stop:module=0x%x
+stopon:Stopon
+suspend:SuspendThread:THREAD=0x%0.8x
+sysfileupd:UpdateSystemFile
+systeminfo:GetSystemInfo
+systime:SystemTime:clockhi=0x%08x clocklo=0x%08x
+tdecomp:TransparentDecompress
+threadinfo:ThreadInfo
+threads:ListThreads
+threadstat:GetExitCodeThread
+title:SetTitle:NAME="%s":NOPERSIST
+traceimports:TraceImports
+usbportctrl:UsbPortControl
+user:AddUserCommand:NAME="%s":NAME="%s" REMOVE
+userlist:ListUsers
+vd:AnaBackDoor
+verbose:Verbose
+walkmem:WalkCommittedMemory
+welcomedefault:SetEnforceWelcomeDefaultFlag
+welcomehide:SetEnforceWelcomeHideFlag
+writefile:ReceivePartialFile:NAME="%s" OFFSET=%lu LENGTH=%lu
+xbeinfo:XbeInfo:NAME="%s"
+xexfield:XexField:module=%s field=0x%08x
+xstudio:XStudioCommandHandler
