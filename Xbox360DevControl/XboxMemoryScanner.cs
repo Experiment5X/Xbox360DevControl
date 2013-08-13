@@ -61,13 +61,13 @@ namespace XboxCheatEngine
                             curValue = buffer[offset];
                             break;
                         case BitWidth.Word16:
-                            curValue = BitConverter.ToUInt16(buffer, offset);
+                            curValue = BitConverterBigEndian.ToUInt16(buffer, offset);
                             break;
                         case BitWidth.Dword32:
-                            curValue = BitConverter.ToUInt32(buffer, offset);
+                            curValue = BitConverterBigEndian.ToUInt32(buffer, offset);
                             break;
                         case BitWidth.Qword64:
-                            curValue = BitConverter.ToUInt64(buffer, offset);
+                            curValue = BitConverterBigEndian.ToUInt64(buffer, offset);
                             break;
                     }
 
@@ -90,5 +90,32 @@ namespace XboxCheatEngine
         Dword32 = 4,
         Qword64 = 8,
         Any = 0xFF
+    }
+
+    class BitConverterBigEndian
+    {
+        public static ushort ToUInt16(byte[] buffer, int startIndex)
+        {
+            ushort toReturn = 0;
+            for (int i = 0; i < 2; i++)
+                toReturn |= (ushort)((ushort)buffer[startIndex + i] << ((1 - i) * 8));
+            return toReturn;
+        }
+
+        public static uint ToUInt32(byte[] buffer, int startIndex)
+        {
+            uint toReturn = 0;
+            for (int i = 0; i < 4; i++)
+                toReturn |= (uint)((uint)buffer[startIndex + i] << ((3 - i) * 8));
+            return toReturn;
+        }
+
+        public static ulong ToUInt64(byte[] buffer, int startIndex)
+        {
+            ulong toReturn = 0;
+            for (int i = 0; i < 8; i++)
+                toReturn |= (ulong)((ulong)buffer[startIndex + i] << ((7 - i) * 8));
+            return toReturn;
+        }
     }
 }
