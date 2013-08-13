@@ -85,9 +85,8 @@ namespace XboxCheatEngine
 
         private void EnableControls(bool enabled)
         {
-            lstCommitedMemory.Enabled = enabled;
-            lstModules.Enabled = enabled;
-            consoleProperties.Enabled = enabled;
+            tabControl1.Enabled = enabled;
+            btnOpenTray.Enabled = enabled;
             btnCustomCommand.Enabled = enabled;
             btnDisonnect.Enabled = enabled;
             btnConnect.Enabled = !enabled;

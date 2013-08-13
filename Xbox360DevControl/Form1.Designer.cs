@@ -54,16 +54,17 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lstMemScanResults = new System.Windows.Forms.ListView();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnSearchMemory = new System.Windows.Forms.Button();
+            this.cmbxBitwidth = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.rdoHex = new System.Windows.Forms.RadioButton();
             this.rdoDecimal = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbxBitwidth = new System.Windows.Forms.ComboBox();
-            this.btnSearchMemory = new System.Windows.Forms.Button();
-            this.lstMemScanResults = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chkExtendedSearch = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -274,6 +275,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.chkExtendedSearch);
             this.tabPage4.Controls.Add(this.lstMemScanResults);
             this.tabPage4.Controls.Add(this.btnSearchMemory);
             this.tabPage4.Controls.Add(this.cmbxBitwidth);
@@ -289,6 +291,66 @@
             this.tabPage4.Size = new System.Drawing.Size(628, 397);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Memory Scanner";
+            // 
+            // lstMemScanResults
+            // 
+            this.lstMemScanResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7});
+            this.lstMemScanResults.FullRowSelect = true;
+            this.lstMemScanResults.Location = new System.Drawing.Point(11, 82);
+            this.lstMemScanResults.Name = "lstMemScanResults";
+            this.lstMemScanResults.Size = new System.Drawing.Size(294, 307);
+            this.lstMemScanResults.TabIndex = 8;
+            this.lstMemScanResults.UseCompatibleStateImageBehavior = false;
+            this.lstMemScanResults.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Address";
+            this.columnHeader7.Width = 258;
+            // 
+            // btnSearchMemory
+            // 
+            this.btnSearchMemory.Location = new System.Drawing.Point(200, 35);
+            this.btnSearchMemory.Name = "btnSearchMemory";
+            this.btnSearchMemory.Size = new System.Drawing.Size(105, 41);
+            this.btnSearchMemory.TabIndex = 7;
+            this.btnSearchMemory.Text = "Search";
+            this.btnSearchMemory.UseVisualStyleBackColor = true;
+            this.btnSearchMemory.Click += new System.EventHandler(this.btnSearchMemory_Click);
+            // 
+            // cmbxBitwidth
+            // 
+            this.cmbxBitwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxBitwidth.FormattingEnabled = true;
+            this.cmbxBitwidth.Items.AddRange(new object[] {
+            "[08] Byte",
+            "[16] Word",
+            "[32] Dword",
+            "[64] Qword"});
+            this.cmbxBitwidth.Location = new System.Drawing.Point(70, 55);
+            this.cmbxBitwidth.Name = "cmbxBitwidth";
+            this.cmbxBitwidth.Size = new System.Drawing.Size(124, 21);
+            this.cmbxBitwidth.TabIndex = 6;
+            this.cmbxBitwidth.SelectedIndexChanged += new System.EventHandler(this.cmbxBitwidth_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Bit Width:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Base:";
             // 
             // rdoHex
             // 
@@ -329,65 +391,15 @@
             this.txtSearchValue.TabIndex = 0;
             this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged);
             // 
-            // label2
+            // chkExtendedSearch
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Base:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Bit Width:";
-            // 
-            // cmbxBitwidth
-            // 
-            this.cmbxBitwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxBitwidth.FormattingEnabled = true;
-            this.cmbxBitwidth.Items.AddRange(new object[] {
-            "[08] Byte",
-            "[16] Word",
-            "[32] Dword",
-            "[64] Qword"});
-            this.cmbxBitwidth.Location = new System.Drawing.Point(70, 55);
-            this.cmbxBitwidth.Name = "cmbxBitwidth";
-            this.cmbxBitwidth.Size = new System.Drawing.Size(124, 21);
-            this.cmbxBitwidth.TabIndex = 6;
-            this.cmbxBitwidth.SelectedIndexChanged += new System.EventHandler(this.cmbxBitwidth_SelectedIndexChanged);
-            // 
-            // btnSearchMemory
-            // 
-            this.btnSearchMemory.Location = new System.Drawing.Point(200, 7);
-            this.btnSearchMemory.Name = "btnSearchMemory";
-            this.btnSearchMemory.Size = new System.Drawing.Size(105, 69);
-            this.btnSearchMemory.TabIndex = 7;
-            this.btnSearchMemory.Text = "Search";
-            this.btnSearchMemory.UseVisualStyleBackColor = true;
-            this.btnSearchMemory.Click += new System.EventHandler(this.btnSearchMemory_Click);
-            // 
-            // lstMemScanResults
-            // 
-            this.lstMemScanResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7});
-            this.lstMemScanResults.FullRowSelect = true;
-            this.lstMemScanResults.Location = new System.Drawing.Point(11, 82);
-            this.lstMemScanResults.Name = "lstMemScanResults";
-            this.lstMemScanResults.Size = new System.Drawing.Size(294, 307);
-            this.lstMemScanResults.TabIndex = 8;
-            this.lstMemScanResults.UseCompatibleStateImageBehavior = false;
-            this.lstMemScanResults.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Address";
-            this.columnHeader7.Width = 258;
+            this.chkExtendedSearch.AutoSize = true;
+            this.chkExtendedSearch.Location = new System.Drawing.Point(200, 12);
+            this.chkExtendedSearch.Name = "chkExtendedSearch";
+            this.chkExtendedSearch.Size = new System.Drawing.Size(108, 17);
+            this.chkExtendedSearch.TabIndex = 9;
+            this.chkExtendedSearch.Text = "Extended Search";
+            this.chkExtendedSearch.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -448,6 +460,7 @@
         private System.Windows.Forms.ListView lstMemScanResults;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button btnSearchMemory;
+        private System.Windows.Forms.CheckBox chkExtendedSearch;
     }
 }
 
