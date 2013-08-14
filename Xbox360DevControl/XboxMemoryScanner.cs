@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace XboxCheatEngine
 {
@@ -21,23 +22,25 @@ namespace XboxCheatEngine
             this.memoryBlock = memoryBlock;
         }
 
-        public IEnumerable<uint> FindValue(ulong value, BitWidth bitWidth)
+        public async Task<List<uint>> FindValue(ulong value, BitWidth bitWidth)
         {
             if (memoryBlock == null)
             {
+                List<uint> toReturn = new List<uint>();
+
                 foreach (CommittedMemoryBlock block in console.CommittedMemory)
-                    foreach (uint addr in FindValue(block, value, bitWidth))
-                        yield return addr;
+                    toReturn.AddRange(await FindValue(block, value, bitWidth));
+                return toReturn;
             }
             else
             {
-                foreach (uint addr in FindValue((CommittedMemoryBlock)memoryBlock, value, bitWidth))
-                    yield return addr;
+                return await FindValue((CommittedMemoryBlock)memoryBlock, value, bitWidth);
             }
         }
 
-        private IEnumerable<uint> FindValue(CommittedMemoryBlock memBlock, ulong value, BitWidth bitWidth)
+        private async Task<List<uint>> FindValue(CommittedMemoryBlock memBlock, ulong value, BitWidth bitWidth)
         {
+            List<uint> toReturn = new List<uint>();
             byte[] buffer = new byte[0x10000];
             uint bytesLeft = memBlock.Size;
             uint pos = memBlock.Base;
@@ -73,13 +76,17 @@ namespace XboxCheatEngine
 
                     // if it matches, then return address it was found at
                     if (curValue == value)
-                        yield return pos + (uint)offset;
+                        toReturn.Add(pos + (uint)offset);
                 }
 
                 // advance to the next value in the buffer
                 pos += bytesToRead;
                 bytesLeft -= bytesToRead;
+
+                await Task.Delay(200);
             }
+
+            return toReturn;
         }
     }
 
