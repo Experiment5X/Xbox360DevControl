@@ -80,7 +80,7 @@
             this.toolStripDropDownButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(636, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(644, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -224,7 +224,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(628, 397);
+            this.tabPage1.Size = new System.Drawing.Size(636, 404);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Committed Memory";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -239,7 +239,7 @@
             this.lstCommitedMemory.FullRowSelect = true;
             this.lstCommitedMemory.Location = new System.Drawing.Point(3, 3);
             this.lstCommitedMemory.Name = "lstCommitedMemory";
-            this.lstCommitedMemory.Size = new System.Drawing.Size(622, 391);
+            this.lstCommitedMemory.Size = new System.Drawing.Size(630, 398);
             this.lstCommitedMemory.TabIndex = 0;
             this.lstCommitedMemory.UseCompatibleStateImageBehavior = false;
             this.lstCommitedMemory.View = System.Windows.Forms.View.Details;
@@ -269,7 +269,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(636, 423);
+            this.tabControl1.Size = new System.Drawing.Size(644, 430);
             this.tabControl1.TabIndex = 15;
             // 
             // tabPage4
@@ -311,6 +311,7 @@
             // 
             // btnSearchMemory
             // 
+            this.btnSearchMemory.Enabled = false;
             this.btnSearchMemory.Location = new System.Drawing.Point(200, 35);
             this.btnSearchMemory.Name = "btnSearchMemory";
             this.btnSearchMemory.Size = new System.Drawing.Size(105, 41);
@@ -361,6 +362,7 @@
             this.rdoHex.TabIndex = 3;
             this.rdoHex.Text = "Hex";
             this.rdoHex.UseVisualStyleBackColor = true;
+            this.rdoHex.CheckedChanged += new System.EventHandler(this.rdoHex_CheckedChanged);
             // 
             // rdoDecimal
             // 
@@ -373,6 +375,7 @@
             this.rdoDecimal.TabStop = true;
             this.rdoDecimal.Text = "Decimal";
             this.rdoDecimal.UseVisualStyleBackColor = true;
+            this.rdoDecimal.CheckedChanged += new System.EventHandler(this.rdoHex_CheckedChanged);
             // 
             // label1
             // 
@@ -405,7 +408,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 448);
+            this.ClientSize = new System.Drawing.Size(644, 455);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
