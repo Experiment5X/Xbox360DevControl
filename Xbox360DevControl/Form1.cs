@@ -6,6 +6,7 @@ using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 
 namespace XboxCheatEngine
 {
@@ -105,10 +106,10 @@ namespace XboxCheatEngine
 
         private void txtSearchValue_TextChanged(object sender, EventArgs e)
         {
-            CheckInput();
+            btnSearchMemory.Enabled = CheckInput() && txtSearchValue.Text != "";
         }
 
-        private void CheckInput()
+        private bool CheckInput()
         {
             // I know this is gross, but i really don't see a way around it
             switch (cmbxBitwidth.SelectedIndex)
@@ -150,6 +151,8 @@ namespace XboxCheatEngine
                     break;
                 }
             }
+
+            return txtSearchValue.ForeColor == Color.Black;
         }
 
         private void cmbxBitwidth_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,15 +160,34 @@ namespace XboxCheatEngine
             CheckInput();
         }
 
-        private void btnSearchMemory_Click(object sender, EventArgs e)
+        private async void btnSearchMemory_Click(object sender, EventArgs e)
         {
+            // find the heap
             CommittedMemoryBlock block = console.CommittedMemory[0];
             foreach (CommittedMemoryBlock b in console.CommittedMemory)
                 if (b.Base == 0x40000000)
                     block = b;
 
             XboxMemoryScanner scanner = new XboxMemoryScanner(console, block);
-            IEnumerable<uint> instances = scanner.FindValue(0xBAADF00D, BitWidth.Dword32);
+
+            ulong value = ulong.Parse(txtSearchValue.Text, (rdoHex.Checked) ? NumberStyles.HexNumber : NumberStyles.Integer);
+            BitWidth bitWidth = (BitWidth)Math.Pow(2, cmbxBitwidth.SelectedIndex);
+
+            btnSearchMemory.Enabled = false;
+            btnSearchMemory.Text = "Searching";
+
+            List<uint> instances = await scanner.FindValue(value, bitWidth);
+
+            foreach (uint instance in instances)
+                lstMemScanResults.Items.Add("0x" + instance.ToString("X8"));
+
+            btnSearchMemory.Enabled = true;
+            btnSearchMemory.Text = "Search";
+        }
+
+        private void rdoHex_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckInput();
         }
     }
 }
