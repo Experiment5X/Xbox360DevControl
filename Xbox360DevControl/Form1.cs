@@ -20,6 +20,8 @@ namespace XboxCheatEngine
         }
 
         XboxDevConsole console;
+        XboxMemoryScanner scanner;
+        bool searchStarted = false;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -162,32 +164,54 @@ namespace XboxCheatEngine
 
         private async void btnSearchMemory_Click(object sender, EventArgs e)
         {
-            // find the heap
-            CommittedMemoryBlock block = console.CommittedMemory[0];
-            foreach (CommittedMemoryBlock b in console.CommittedMemory)
-                if (b.Base == 0x40000000)
-                    block = b;
+            if (!searchStarted)
+            {
+                // find the heap blocks
+                List<CommittedMemoryBlock> heapBlocks = new List<CommittedMemoryBlock>();
+                foreach (CommittedMemoryBlock b in console.CommittedMemory)
+                    if (b.Base == 0x82000000)
+                        heapBlocks.Add(b);
 
-            XboxMemoryScanner scanner = new XboxMemoryScanner(console, block);
+                scanner = new XboxMemoryScanner(console, heapBlocks);
 
-            ulong value = ulong.Parse(txtSearchValue.Text, (rdoHex.Checked) ? NumberStyles.HexNumber : NumberStyles.Integer);
-            BitWidth bitWidth = (BitWidth)Math.Pow(2, cmbxBitwidth.SelectedIndex);
+                // grab the user arguments from the UI
+                ulong value = ulong.Parse(txtSearchValue.Text, (rdoHex.Checked) ? NumberStyles.HexNumber : NumberStyles.Integer);
+                BitWidth bitWidth = (BitWidth)Math.Pow(2, cmbxBitwidth.SelectedIndex);
 
-            btnSearchMemory.Enabled = false;
-            btnSearchMemory.Text = "Searching";
+                // update the UI while searching
+                btnSearchMemory.Enabled = false;
 
-            List<uint> instances = await scanner.FindValue(value, bitWidth);
+                // add all of the results to the list view
+                foreach (uint instance in await scanner.FindValue(value, bitWidth))
+                    lstMemScanResults.Items.Add("0x" + instance.ToString("X8"));
 
-            foreach (uint instance in instances)
-                lstMemScanResults.Items.Add("0x" + instance.ToString("X8"));
+                // update the UI so the user can perform another search
+                btnSearchMemory.Enabled = true;
+                tipMemoryScan.SetToolTip(btnSearchMemory, "Search through the results for a new value");
 
-            btnSearchMemory.Enabled = true;
-            btnSearchMemory.Text = "Search";
+                searchStarted = true;
+            }
+            else
+            {
+                btnSearchMemory.Enabled = false;
+
+                lstMemScanResults.Clear();
+                foreach (uint address in await scanner.NarrowResults(ulong.Parse(txtSearchValue.Text, (rdoHex.Checked) ? NumberStyles.HexNumber : NumberStyles.Integer)))
+                    lstMemScanResults.Items.Add("0x" + address.ToString("X8"));
+
+                btnSearchMemory.Enabled = true;
+            }
         }
 
         private void rdoHex_CheckedChanged(object sender, EventArgs e)
         {
             CheckInput();
+        }
+
+        private void btnNewSearch_Click(object sender, EventArgs e)
+        {
+            lstMemScanResults.Items.Clear();
+            txtSearchValue.Text = "";
         }
     }
 }

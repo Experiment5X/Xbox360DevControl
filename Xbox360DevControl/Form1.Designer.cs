@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -54,6 +55,8 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnNewSearch = new System.Windows.Forms.Button();
+            this.chkExtendedSearch = new System.Windows.Forms.CheckBox();
             this.lstMemScanResults = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSearchMemory = new System.Windows.Forms.Button();
@@ -64,7 +67,7 @@
             this.rdoDecimal = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
-            this.chkExtendedSearch = new System.Windows.Forms.CheckBox();
+            this.tipMemoryScan = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -142,7 +145,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(628, 397);
+            this.tabPage3.Size = new System.Drawing.Size(636, 404);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Modules";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -158,9 +161,10 @@
             this.columnHeader10,
             this.columnHeader11});
             this.lstModules.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstModules.FullRowSelect = true;
             this.lstModules.Location = new System.Drawing.Point(3, 3);
             this.lstModules.Name = "lstModules";
-            this.lstModules.Size = new System.Drawing.Size(622, 391);
+            this.lstModules.Size = new System.Drawing.Size(630, 398);
             this.lstModules.TabIndex = 0;
             this.lstModules.UseCompatibleStateImageBehavior = false;
             this.lstModules.View = System.Windows.Forms.View.Details;
@@ -205,7 +209,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(628, 397);
+            this.tabPage2.Size = new System.Drawing.Size(636, 404);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Properties";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -215,7 +219,7 @@
             this.consoleProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.consoleProperties.Location = new System.Drawing.Point(3, 3);
             this.consoleProperties.Name = "consoleProperties";
-            this.consoleProperties.Size = new System.Drawing.Size(622, 391);
+            this.consoleProperties.Size = new System.Drawing.Size(630, 398);
             this.consoleProperties.TabIndex = 14;
             // 
             // tabPage1
@@ -275,6 +279,7 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.btnNewSearch);
             this.tabPage4.Controls.Add(this.chkExtendedSearch);
             this.tabPage4.Controls.Add(this.lstMemScanResults);
             this.tabPage4.Controls.Add(this.btnSearchMemory);
@@ -288,9 +293,30 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(628, 397);
+            this.tabPage4.Size = new System.Drawing.Size(636, 404);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Memory Scanner";
+            // 
+            // btnNewSearch
+            // 
+            this.btnNewSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSearch.Image")));
+            this.btnNewSearch.Location = new System.Drawing.Point(239, 7);
+            this.btnNewSearch.Name = "btnNewSearch";
+            this.btnNewSearch.Size = new System.Drawing.Size(36, 22);
+            this.btnNewSearch.TabIndex = 10;
+            this.tipMemoryScan.SetToolTip(this.btnNewSearch, "Start a new search");
+            this.btnNewSearch.UseVisualStyleBackColor = true;
+            this.btnNewSearch.Click += new System.EventHandler(this.btnNewSearch_Click);
+            // 
+            // chkExtendedSearch
+            // 
+            this.chkExtendedSearch.AutoSize = true;
+            this.chkExtendedSearch.Location = new System.Drawing.Point(200, 57);
+            this.chkExtendedSearch.Name = "chkExtendedSearch";
+            this.chkExtendedSearch.Size = new System.Drawing.Size(108, 17);
+            this.chkExtendedSearch.TabIndex = 9;
+            this.chkExtendedSearch.Text = "Extended Search";
+            this.chkExtendedSearch.UseVisualStyleBackColor = true;
             // 
             // lstMemScanResults
             // 
@@ -312,11 +338,12 @@
             // btnSearchMemory
             // 
             this.btnSearchMemory.Enabled = false;
-            this.btnSearchMemory.Location = new System.Drawing.Point(200, 35);
+            this.btnSearchMemory.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchMemory.Image")));
+            this.btnSearchMemory.Location = new System.Drawing.Point(200, 7);
             this.btnSearchMemory.Name = "btnSearchMemory";
-            this.btnSearchMemory.Size = new System.Drawing.Size(105, 41);
+            this.btnSearchMemory.Size = new System.Drawing.Size(33, 22);
             this.btnSearchMemory.TabIndex = 7;
-            this.btnSearchMemory.Text = "Search";
+            this.tipMemoryScan.SetToolTip(this.btnSearchMemory, "Scan your Xbox\'s memory for a value");
             this.btnSearchMemory.UseVisualStyleBackColor = true;
             this.btnSearchMemory.Click += new System.EventHandler(this.btnSearchMemory_Click);
             // 
@@ -394,16 +421,6 @@
             this.txtSearchValue.TabIndex = 0;
             this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged);
             // 
-            // chkExtendedSearch
-            // 
-            this.chkExtendedSearch.AutoSize = true;
-            this.chkExtendedSearch.Location = new System.Drawing.Point(200, 12);
-            this.chkExtendedSearch.Name = "chkExtendedSearch";
-            this.chkExtendedSearch.Size = new System.Drawing.Size(108, 17);
-            this.chkExtendedSearch.TabIndex = 9;
-            this.chkExtendedSearch.Text = "Extended Search";
-            this.chkExtendedSearch.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,6 +481,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button btnSearchMemory;
         private System.Windows.Forms.CheckBox chkExtendedSearch;
+        private System.Windows.Forms.Button btnNewSearch;
+        private System.Windows.Forms.ToolTip tipMemoryScan;
     }
 }
 
