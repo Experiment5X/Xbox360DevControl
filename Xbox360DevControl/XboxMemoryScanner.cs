@@ -11,31 +11,57 @@ namespace XboxCheatEngine
     {
         #region Private Variables
 
-        CommittedMemoryBlock? memoryBlock;
+        List<CommittedMemoryBlock> memoryBlocks;
         XboxDevConsole console;
+        List<uint> prevScanResults;
+        BitWidth prevBitWidth;
 
         #endregion
 
-        public XboxMemoryScanner(XboxDevConsole console, CommittedMemoryBlock? memoryBlock = null)
+        public XboxMemoryScanner(XboxDevConsole console, List<CommittedMemoryBlock> memoryBlocks = null)
         {
             this.console = console;
-            this.memoryBlock = memoryBlock;
+            this.memoryBlocks = memoryBlocks;
         }
 
         public async Task<List<uint>> FindValue(ulong value, BitWidth bitWidth)
         {
-            if (memoryBlock == null)
-            {
-                List<uint> toReturn = new List<uint>();
+            prevBitWidth = bitWidth;
+            prevScanResults = new List<uint>();
 
+            // if the caller didn't specify which memory blocks to search, we'll just search all of them
+            if (memoryBlocks == null)
+            {
                 foreach (CommittedMemoryBlock block in console.CommittedMemory)
-                    toReturn.AddRange(await FindValue(block, value, bitWidth));
-                return toReturn;
+                    prevScanResults.AddRange(await FindValue(block, value, bitWidth));
+                return prevScanResults;
             }
             else
             {
-                return await FindValue((CommittedMemoryBlock)memoryBlock, value, bitWidth);
+                foreach (CommittedMemoryBlock block in memoryBlocks)
+                    prevScanResults.AddRange(await FindValue(block, value, bitWidth));
+                return prevScanResults;
             }
+        }
+
+        public async Task<List<uint>> NarrowResults(ulong value)
+        {
+            byte[] buffer = new byte[(int)prevBitWidth];
+            List<uint> newResults = new List<uint>();
+
+            int i = 0;
+            foreach (uint address in prevScanResults)
+            {
+                console.GetMemory(address, (uint)prevBitWidth, buffer);
+                if (GetValue(buffer, 0, prevBitWidth) == value)
+                    newResults.Add(address);
+
+                if (i++ % 1000 == 0)
+                    await Task.Delay(10);
+            }
+
+            prevScanResults = newResults;
+            return newResults;
         }
 
         private async Task<List<uint>> FindValue(CommittedMemoryBlock memBlock, ulong value, BitWidth bitWidth)
@@ -57,36 +83,42 @@ namespace XboxCheatEngine
                     int offset = i * (int)bitWidth;
 
                     // get the correct value at the current position
-                    ulong curValue = 0;
-                    switch (bitWidth)
-                    {
-                        case BitWidth.Byte8:
-                            curValue = buffer[offset];
-                            break;
-                        case BitWidth.Word16:
-                            curValue = BitConverterBigEndian.ToUInt16(buffer, offset);
-                            break;
-                        case BitWidth.Dword32:
-                            curValue = BitConverterBigEndian.ToUInt32(buffer, offset);
-                            break;
-                        case BitWidth.Qword64:
-                            curValue = BitConverterBigEndian.ToUInt64(buffer, offset);
-                            break;
-                    }
+                    ulong curValue = GetValue(buffer, offset, bitWidth);
 
                     // if it matches, then return address it was found at
                     if (curValue == value)
                         toReturn.Add(pos + (uint)offset);
+
+                    if (i % 250 == 0)
+                        await Task.Delay(10);
                 }
+
+                await Task.Delay(20);
 
                 // advance to the next value in the buffer
                 pos += bytesToRead;
                 bytesLeft -= bytesToRead;
 
-                await Task.Delay(200);
             }
 
             return toReturn;
+        }
+
+        private ulong GetValue(byte[] buffer, int offset, BitWidth bitWidth)
+        {
+            switch (bitWidth)
+            {
+                case BitWidth.Byte8:
+                     return buffer[offset];
+                case BitWidth.Word16:
+                     return BitConverterBigEndian.ToUInt16(buffer, offset);
+                case BitWidth.Dword32:
+                     return BitConverterBigEndian.ToUInt32(buffer, offset);
+                case BitWidth.Qword64:
+                     return BitConverterBigEndian.ToUInt64(buffer, offset);
+            }
+
+            return 0;
         }
     }
 
