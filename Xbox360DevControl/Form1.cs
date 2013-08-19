@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using XDevkit;
 using System.Net;
-using Microsoft.VisualBasic;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Drawing;
@@ -41,7 +40,10 @@ namespace XboxCheatEngine
         {
             try
             {
-                string consoleName = Interaction.InputBox("Console Name", "Enter the console's name", "169.254.66.42");
+                InputDialog dialog = new InputDialog("Enter the console's name", "Console Name", "169.254.66.42");
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+                string consoleName = dialog.GetText();
 
                 console = new XboxDevConsole(consoleName);
                 foreach (CommittedMemoryBlock block in console.CommittedMemory)
