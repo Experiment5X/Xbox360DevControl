@@ -56,7 +56,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btnNewSearch = new System.Windows.Forms.Button();
-            this.chkExtendedSearch = new System.Windows.Forms.CheckBox();
             this.lstMemScanResults = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSearchMemory = new System.Windows.Forms.Button();
@@ -68,6 +67,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
             this.tipMemoryScan = new System.Windows.Forms.ToolTip(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbxMemRegion = new System.Windows.Forms.ComboBox();
+            this.txtCustomMemAddr = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCustomMemLen = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -279,8 +283,12 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.txtCustomMemLen);
+            this.tabPage4.Controls.Add(this.label5);
+            this.tabPage4.Controls.Add(this.txtCustomMemAddr);
+            this.tabPage4.Controls.Add(this.cmbxMemRegion);
+            this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.btnNewSearch);
-            this.tabPage4.Controls.Add(this.chkExtendedSearch);
             this.tabPage4.Controls.Add(this.lstMemScanResults);
             this.tabPage4.Controls.Add(this.btnSearchMemory);
             this.tabPage4.Controls.Add(this.cmbxBitwidth);
@@ -300,7 +308,7 @@
             // btnNewSearch
             // 
             this.btnNewSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSearch.Image")));
-            this.btnNewSearch.Location = new System.Drawing.Point(239, 7);
+            this.btnNewSearch.Location = new System.Drawing.Point(574, 4);
             this.btnNewSearch.Name = "btnNewSearch";
             this.btnNewSearch.Size = new System.Drawing.Size(36, 22);
             this.btnNewSearch.TabIndex = 10;
@@ -308,24 +316,14 @@
             this.btnNewSearch.UseVisualStyleBackColor = true;
             this.btnNewSearch.Click += new System.EventHandler(this.btnNewSearch_Click);
             // 
-            // chkExtendedSearch
-            // 
-            this.chkExtendedSearch.AutoSize = true;
-            this.chkExtendedSearch.Location = new System.Drawing.Point(200, 57);
-            this.chkExtendedSearch.Name = "chkExtendedSearch";
-            this.chkExtendedSearch.Size = new System.Drawing.Size(108, 17);
-            this.chkExtendedSearch.TabIndex = 9;
-            this.chkExtendedSearch.Text = "Extended Search";
-            this.chkExtendedSearch.UseVisualStyleBackColor = true;
-            // 
             // lstMemScanResults
             // 
             this.lstMemScanResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7});
             this.lstMemScanResults.FullRowSelect = true;
-            this.lstMemScanResults.Location = new System.Drawing.Point(11, 82);
+            this.lstMemScanResults.Location = new System.Drawing.Point(11, 6);
             this.lstMemScanResults.Name = "lstMemScanResults";
-            this.lstMemScanResults.Size = new System.Drawing.Size(294, 307);
+            this.lstMemScanResults.Size = new System.Drawing.Size(266, 383);
             this.lstMemScanResults.TabIndex = 8;
             this.lstMemScanResults.UseCompatibleStateImageBehavior = false;
             this.lstMemScanResults.View = System.Windows.Forms.View.Details;
@@ -339,7 +337,7 @@
             // 
             this.btnSearchMemory.Enabled = false;
             this.btnSearchMemory.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchMemory.Image")));
-            this.btnSearchMemory.Location = new System.Drawing.Point(200, 7);
+            this.btnSearchMemory.Location = new System.Drawing.Point(538, 4);
             this.btnSearchMemory.Name = "btnSearchMemory";
             this.btnSearchMemory.Size = new System.Drawing.Size(33, 22);
             this.btnSearchMemory.TabIndex = 7;
@@ -356,16 +354,16 @@
             "[16] Word",
             "[32] Dword",
             "[64] Qword"});
-            this.cmbxBitwidth.Location = new System.Drawing.Point(70, 55);
+            this.cmbxBitwidth.Location = new System.Drawing.Point(408, 60);
             this.cmbxBitwidth.Name = "cmbxBitwidth";
-            this.cmbxBitwidth.Size = new System.Drawing.Size(124, 21);
+            this.cmbxBitwidth.Size = new System.Drawing.Size(163, 21);
             this.cmbxBitwidth.TabIndex = 6;
             this.cmbxBitwidth.SelectedIndexChanged += new System.EventHandler(this.cmbxBitwidth_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 63);
+            this.label3.Location = new System.Drawing.Point(304, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 5;
@@ -374,7 +372,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 39);
+            this.label2.Location = new System.Drawing.Point(304, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 4;
@@ -383,7 +381,7 @@
             // rdoHex
             // 
             this.rdoHex.AutoSize = true;
-            this.rdoHex.Location = new System.Drawing.Point(150, 35);
+            this.rdoHex.Location = new System.Drawing.Point(477, 32);
             this.rdoHex.Name = "rdoHex";
             this.rdoHex.Size = new System.Drawing.Size(44, 17);
             this.rdoHex.TabIndex = 3;
@@ -395,7 +393,7 @@
             // 
             this.rdoDecimal.AutoSize = true;
             this.rdoDecimal.Checked = true;
-            this.rdoDecimal.Location = new System.Drawing.Point(81, 35);
+            this.rdoDecimal.Location = new System.Drawing.Point(408, 32);
             this.rdoDecimal.Name = "rdoDecimal";
             this.rdoDecimal.Size = new System.Drawing.Size(63, 17);
             this.rdoDecimal.TabIndex = 2;
@@ -407,7 +405,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 12);
+            this.label1.Location = new System.Drawing.Point(304, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 1;
@@ -415,11 +413,55 @@
             // 
             // txtSearchValue
             // 
-            this.txtSearchValue.Location = new System.Drawing.Point(70, 9);
+            this.txtSearchValue.Location = new System.Drawing.Point(408, 6);
             this.txtSearchValue.Name = "txtSearchValue";
             this.txtSearchValue.Size = new System.Drawing.Size(124, 20);
             this.txtSearchValue.TabIndex = 0;
             this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(304, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Memory Region:";
+            // 
+            // cmbxMemRegion
+            // 
+            this.cmbxMemRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxMemRegion.FormattingEnabled = true;
+            this.cmbxMemRegion.Location = new System.Drawing.Point(408, 94);
+            this.cmbxMemRegion.Name = "cmbxMemRegion";
+            this.cmbxMemRegion.Size = new System.Drawing.Size(163, 21);
+            this.cmbxMemRegion.TabIndex = 12;
+            this.cmbxMemRegion.SelectedIndexChanged += new System.EventHandler(this.cmbxMemRegion_SelectedIndexChanged);
+            // 
+            // txtCustomMemAddr
+            // 
+            this.txtCustomMemAddr.Enabled = false;
+            this.txtCustomMemAddr.Location = new System.Drawing.Point(408, 128);
+            this.txtCustomMemAddr.Name = "txtCustomMemAddr";
+            this.txtCustomMemAddr.Size = new System.Drawing.Size(102, 20);
+            this.txtCustomMemAddr.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(304, 131);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Custom Region:";
+            // 
+            // txtCustomMemLen
+            // 
+            this.txtCustomMemLen.Enabled = false;
+            this.txtCustomMemLen.Location = new System.Drawing.Point(516, 128);
+            this.txtCustomMemLen.Name = "txtCustomMemLen";
+            this.txtCustomMemLen.Size = new System.Drawing.Size(94, 20);
+            this.txtCustomMemLen.TabIndex = 15;
             // 
             // Form1
             // 
@@ -480,9 +522,13 @@
         private System.Windows.Forms.ListView lstMemScanResults;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Button btnSearchMemory;
-        private System.Windows.Forms.CheckBox chkExtendedSearch;
         private System.Windows.Forms.Button btnNewSearch;
         private System.Windows.Forms.ToolTip tipMemoryScan;
+        private System.Windows.Forms.TextBox txtCustomMemLen;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCustomMemAddr;
+        private System.Windows.Forms.ComboBox cmbxMemRegion;
+        private System.Windows.Forms.Label label4;
     }
 }
 

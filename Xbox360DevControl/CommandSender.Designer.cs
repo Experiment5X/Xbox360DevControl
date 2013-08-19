@@ -34,10 +34,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCommandInfo = new System.Windows.Forms.TextBox();
             this.lstStrings = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtResponse = new System.Windows.Forms.TextBox();
             this.cntxListCopy = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtResponse = new System.Windows.Forms.TextBox();
             this.cntxListCopy.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +89,20 @@
             this.lstStrings.Size = new System.Drawing.Size(330, 108);
             this.lstStrings.TabIndex = 5;
             // 
+            // cntxListCopy
+            // 
+            this.cntxListCopy.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.cntxListCopy.Name = "cntxListCopy";
+            this.cntxListCopy.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -108,25 +122,11 @@
             this.txtResponse.Size = new System.Drawing.Size(330, 65);
             this.txtResponse.TabIndex = 9;
             // 
-            // cntxListCopy
-            // 
-            this.cntxListCopy.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem});
-            this.cntxListCopy.Name = "cntxListCopy";
-            this.cntxListCopy.Size = new System.Drawing.Size(103, 26);
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
             // CommandSender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 389);
+            this.ClientSize = new System.Drawing.Size(364, 389);
             this.Controls.Add(this.txtResponse);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lstStrings);

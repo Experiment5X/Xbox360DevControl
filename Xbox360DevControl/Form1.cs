@@ -51,7 +51,11 @@ namespace XboxCheatEngine
                     item.SubItems.Add(block.Protection);
 
                     lstCommitedMemory.Items.Add(item);
+
+                    cmbxMemRegion.Items.Add("0x" + block.Base.ToString("X8") + "\t|\t" + "0x" + block.Size.ToString("X8"));
                 }
+                cmbxMemRegion.Items.Add("All Regions");
+                cmbxMemRegion.Items.Add("Custom");
 
                 foreach (Module module in console.Modules)
                 {
@@ -164,6 +168,7 @@ namespace XboxCheatEngine
 
         private async void btnSearchMemory_Click(object sender, EventArgs e)
         {
+            // start a new search if one hasn't already been started, search through all of memory
             if (!searchStarted)
             {
                 // find the heap blocks
@@ -191,6 +196,7 @@ namespace XboxCheatEngine
 
                 searchStarted = true;
             }
+            // if a search has already been created then only search through the results already found for the updated value
             else
             {
                 btnSearchMemory.Enabled = false;
@@ -210,8 +216,15 @@ namespace XboxCheatEngine
 
         private void btnNewSearch_Click(object sender, EventArgs e)
         {
+            // reset the search
             lstMemScanResults.Items.Clear();
             txtSearchValue.Text = "";
+        }
+
+        private void cmbxMemRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // only allow the user to enter a custom memory region if he/she selected 'Custom' from the combo box
+            txtCustomMemAddr.Enabled = txtCustomMemLen.Enabled = cmbxMemRegion.SelectedIndex == cmbxMemRegion.Items.Count - 1;
         }
     }
 }
